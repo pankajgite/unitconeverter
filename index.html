@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container py-5">
+      <!-- <h1 class="text-center">Unit Converter</h1> -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-primary justify-content-center">
+        <div class="mx-auto" >
+          <h1 class="text-center" style="color: aliceblue;">Unit Converter</h1>
+      </div>
+      </nav>
+      <form class="row g-3 py-5">
+        <div class="col-md-4">
+          <label for="value" class="form-label">Value:</label>
+          <input type="number" class="form-control" id="value" name="value" required step="any">
+        </div>
+        <div class="col-md-4">
+          <label for="from" class="form-label">From:</label>
+          <select class="form-select" id="from" name="from" required>
+            <optgroup label="Length">
+              <option value="centimeters">Centimeters</option>
+              <option value="meters">Meters</option>
+              <option value="kilometers">Kilometers</option>
+              <option value="feet">Feet</option>
+              <option value="miles">Miles</option>
+            </optgroup>
+            <optgroup label="Temperature">
+              <option value="celsius">Celsius</option>
+              <option value="fahrenheit">Fahrenheit</option>
+              <option value="kelvin">Kelvin</option>
+            </optgroup>
+            <optgroup label="Pressure">
+              <option value="pascals">Pascals</option>
+              <option value="kilopascals">Kilopascals</option>
+              <option value="psi">PSI</option>
+            </optgroup>
+            <optgroup label="Time">
+              <option value="seconds">Seconds</option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </optgroup>
+            <optgroup label="Speed">
+              <option value="mph">Mile Per Hour</option>
+              <option value="ft/s">Foot Per Second</option>
+              <option value="m/s">Meter Per Second</option>
+              <option value="kph">Kilometer Per Hour</option>
+              <option value="kn">Knots</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="to" class="form-label">To:</label>
+          <select class="form-select" id="to" name="to" required>
+            <optgroup label="Length">
+              <option value="centimeters">Centimeters</option>
+              <option value="meters">Meters</option>
+              <option value="kilometers">Kilometers</option>
+              <option value="feet">Feet</option>
+              <option value="miles">Miles</option>
+            </optgroup>
+            <optgroup label="Temperature">
+              <option value="celsius">Celsius</option>
+              <option value="fahrenheit">Fahrenheit</option>
+              <option value="kelvin">Kelvin</option>
+            </optgroup>
+            <optgroup label="Pressure">
+              <option value="pascals">Pascals</option>
+              <option value="kilopascals">Kilopascals</option>
+              <option value="psi">PSI</option>
+            </optgroup>
+            <optgroup label="Time">
+              <option value="seconds">Seconds</option>
+              <option value="minutes">Minutes</option>
+              <option value="hours">Hours</option>
+              <option value="days">Days</option>
+            </optgroup>
+            <optgroup label="Speed">
+              <option value="mph">Mile Per Hour</option>
+              <option value="ft/s">Foot Per Second</option>
+              <option value="m/s">Meter Per Second</option>
+              <option value="kph">Kilometer Per Hour</option>
+              <option value="kn">Knots</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="d-grid gap-2 d-md-block text-sm-center py-5" >
+          <button type="submit" class="btn btn-primary">Convert</button>
+        </div>
+        <div class="d-grid gap-2 d-md-block text-sm-center" >
+          <button type="button" class="btn btn-outline-secondary" id ="clearButton">Clear</button>
+        </div>
+      </form>
+      <div class="row py-1">
+        <div class="col-md-12">
+          <h3 class="text-center mb-3">Result:</h3>
+          <p class="text-center" id="result"></p>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const form = document.querySelector('form');
+      const result = document.querySelector('#result');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const value = parseFloat(document.querySelector('#value').value);
+        const from = document.querySelector('#from').value;
+        const to = document.querySelector('#to').value;
+        let convertedValue;
+
+        switch (from) {
+          case 'centimeters':
+            switch (to) {
+              case 'centimeters':
+                convertedValue = value;
+                break;
+              case 'meters':
+                convertedValue = value / 100;
+                break;
+              case 'kilometers':
+                convertedValue = value / 100000;
+                break;
+              case 'feet':
+                convertedValue = value / 30.48;
+                break;
+              case 'miles':
+                convertedValue = value / 160900;
+                break;
+            }
+            break;
+
+          case 'meters':
+            switch (to) {
+              case 'centimeters':
+                convertedValue = value  * 100;
+                break;
+              case 'meters':
+                convertedValue = value;
+                break;
+              case 'kilometers':
+                convertedValue = value / 1000;
+                break;
+              case 'feet':
+                convertedValue = value * 3.28084;
+                break;
+              case 'miles':
+                convertedValue = value / 1609.34;
+                break;
+            }
+            break;
+
+          case 'kilometers':
+            switch (to) {
+              case 'centimeters':
+                convertedValue = value * 100000;
+                break;
+              case 'meters':
+                convertedValue = value * 1000;
+                break;
+              case 'kilometers':
+                convertedValue = value;
+                break;
+              case 'feet':
+                convertedValue = value * 3280.84;
+                break;
+              case 'miles':
+                convertedValue = value / 1.60934;
+                break;
+            }
+            break;
+
+          case 'feet':
+            switch (to) {
+              case 'centimeters':
+                convertedValue = value * 30.48;
+                break;
+              case 'meters':
+                convertedValue = value / 3.28084;
+                break;
+              case 'kilometers':
+                convertedValue = value / 3280.84;
+                break;
+              case 'feet':
+                convertedValue = value;
+                break;
+              case 'miles':
+                convertedValue = value / 5280;
+                break;
+            }
+            break;
+
+          case 'miles':
+            switch (to) {
+              case 'centimeters':
+                convertedValue = value * 160900;
+                break;
+              case 'meters':
+                convertedValue = value * 1609.34;
+                break;
+              case 'kilometers':
+                convertedValue = value * 1.60934;
+                break;
+              case 'feet':
+                convertedValue = value * 5280;
+                break;
+              case 'miles':
+                convertedValue = value;
+                break;
+            }
+            break;
+
+          case 'celsius':
+            switch (to) {
+              case 'celsius':
+                convertedValue = value;
+                break;
+              case 'fahrenheit':
+                convertedValue = (value * 1.8) + 32;
+                break;
+              case 'kelvin':
+                convertedValue = value + 273.15;
+                break;
+            }
+            break;
+
+          case 'fahrenheit':
+            switch (to) {
+              case 'celsius':
+                convertedValue = (value - 32) / 1.8;
+                break;
+              case 'fahrenheit':
+                convertedValue = value;
+                break;
+              case 'kelvin':
+                convertedValue = (value + 459.67) / 1.8;
+                break;
+            }
+            break;
+
+          case 'kelvin':
+            switch (to) {
+              case 'celsius':
+                convertedValue = value - 273.15;
+                break;
+              case 'fahrenheit':
+                convertedValue = (value * 1.8) - 459.67;
+            break;
+          case 'kelvin':
+            convertedValue = value;
+            break;
+        }
+        break;
+
+      case 'pascals':
+        switch (to) {
+          case 'pascals':
+            convertedValue = value;
+            break;
+          case 'kilopascals':
+            convertedValue = value / 1000;
+            break;
+          case 'psi':
+            convertedValue = value / 6895;
+            break;
+          case 'atmospheres':
+            convertedValue = value / 101325;
+            break;
+        }
+        break;
+
+      case 'kilopascals':
+        switch (to) {
+          case 'pascals':
+            convertedValue = value * 1000;
+            break;
+          case 'kilopascals':
+            convertedValue = value;
+            break;
+          case 'psi':
+            convertedValue = value / 6.895;
+            break;
+          case 'atmospheres':
+            convertedValue = value / 101.325;
+            break;
+        }
+        break;
+
+      case 'psi':
+        switch (to) {
+          case 'pascals':
+            convertedValue = value * 6895;
+            break;
+          case 'kilopascals':
+            convertedValue = value * 6.895;
+            break;
+          case 'psi':
+            convertedValue = value;
+            break;
+          case 'atmospheres':
+            convertedValue = value / 14.696;
+            break;
+        }
+        break;
+
+      case 'atmospheres':
+        switch (to) {
+          case 'pascals':
+            convertedValue = value * 101325;
+            break;
+          case 'kilopascals':
+            convertedValue = value * 101.325;
+            break;
+          case 'psi':
+            convertedValue = value * 14.696;
+            break;
+          case 'atmospheres':
+            convertedValue = value;
+            break;
+        }
+        break;
+
+      case 'seconds':
+        switch (to) {
+          case 'seconds':
+            convertedValue = value;
+            break;
+          case 'minutes':
+            convertedValue = value / 60;
+            break;
+          case 'hours':
+            convertedValue = value / 3600;
+            break;
+          case 'days':
+            convertedValue = value / 86400;
+            break;
+        }
+        break;
+
+      case 'minutes':
+        switch (to) {
+          case 'seconds':
+            convertedValue = value * 60;
+            break;
+          case 'minutes':
+            convertedValue = value;
+            break;
+          case 'hours':
+            convertedValue = value / 60;
+            break;
+          case 'days':
+            convertedValue = value / 1440;
+            break;
+        }
+        break;
+
+      case 'hours':
+        switch (to) {
+          case 'seconds':
+            convertedValue = value * 3600;
+            break;
+          case 'minutes':
+            convertedValue = value * 60;
+            break;
+          case 'hours':
+            convertedValue = value;
+            break;
+          case 'days':
+            convertedValue = value / 24;
+            break;
+        }
+        break;
+
+      case 'days':
+        switch (to) {
+          case 'seconds':
+            convertedValue = value * 86400;
+            break;
+          case 'minutes':
+            convertedValue = value * 1440;
+            break;
+          case 'hours':
+            convertedValue = value * 24;
+            break;
+          case 'days':
+            convertedValue = value;
+            break;
+        }
+        break;
+    
+      case 'mph':
+        switch (to) {
+          case 'mph':
+            convertedValue = value;
+            break;
+          case 'ft/s':
+            convertedValue = value * 1.46667;
+            break;
+          case 'm/s':
+            convertedValue = value / 2.23694;
+            break;
+          case 'kph':
+            convertedValue = value * 1.60934;
+            break;
+          case 'kn':
+            convertedValue = value / 1.15078;
+            break;
+        }
+        break;
+
+      case 'ft/s':
+        switch (to) {
+          case 'mph':
+            convertedValue = value / 1.46667;
+            break;
+          case 'ft/s':
+            convertedValue = value;
+            break;
+          case 'm/s':
+            convertedValue = value / 3.28084;
+            break;
+          case 'kph':
+            convertedValue = value * 1.09728;
+            break;
+          case 'kn':
+            convertedValue = value / 1.68781;
+            break;
+        }
+        break;
+
+      case 'm/s':
+        switch (to) {
+          case 'mph':
+            convertedValue = value * 2.23694;
+            break;
+          case 'ft/s':
+            convertedValue = value * 3.28084;
+            break;
+          case 'm/s':
+            convertedValue = value;
+            break;
+          case 'kph':
+            convertedValue = value * 3.6;
+            break;
+          case 'kn':
+            convertedValue = value * 1.94384;
+            break;
+        }
+        break;
+
+      case 'kph':
+        switch (to) {
+          case 'mph':
+            convertedValue = value / 1.60934;
+            break;
+          case 'ft/s':
+            convertedValue = value / 1.09728;
+            break;
+          case 'm/s':
+            convertedValue = value / 3.6;
+            break;
+          case 'kph':
+            convertedValue = value;
+            break;
+          case 'kn':
+            convertedValue = value / 1.852;
+            break;
+        }
+        break;
+
+      case 'kn':
+        switch (to) {
+          case 'mph':
+            convertedValue = value * 1.15078;
+            break;
+          case 'ft/s':
+            convertedValue = value * 1.68781;
+            break;
+          case 'm/s':
+            convertedValue = value / 1.94384;
+            break;
+          case 'kph':
+            convertedValue = value * 1.852;
+            break;
+          case 'kn':
+            convertedValue = value;
+            break;
+        }
+        break;
+    }
+    result.textContent = `${value} ${from} = ${convertedValue} ${to}`;
+  });
+
+const clearButton = document.querySelector("#clearButton");
+const value = document.querySelector("#value");
+const resultField = document.querySelector("#result");
+
+clearButton.addEventListener("click", function() {
+  value.value = "";
+  resultField.innerHTML = "";
+});
+</script>
+</body>
+</html>
+
+  
